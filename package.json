@@ -1,0 +1,22 @@
+{
+  "name": "pet-project-crud-api-node",
+  "version": "1.0.0",
+  "description": "Road to Senior (ha-ha net)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Parzisal/Pet-project-CRUD-API-Node.js.git"
+  },
+  "author": "Andrei Zhuravskiy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Parzisal/Pet-project-CRUD-API-Node.js/issues"
+  },
+  "homepage": "https://github.com/Parzisal/Pet-project-CRUD-API-Node.js#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
