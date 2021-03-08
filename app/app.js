@@ -22,7 +22,6 @@ app.use(cors());
 app.use(passport.initialize());
 require('./middleware/passport')(passport);
 
-// to decode req.body
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
