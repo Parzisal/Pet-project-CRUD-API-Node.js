@@ -2,5 +2,5 @@
 Road to Senior (ha-ha net)
 
 # End-points
-/api/auth/register
-/api/auth/login
+- /api/auth/register
+- /api/auth/login

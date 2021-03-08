@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
@@ -17,6 +18,9 @@ mongoose.connect(configDB.mongoURI, { useNewUrlParser: true, useUnifiedTopology:
 
 app.use(morgan('dev'));
 app.use(cors());
+
+app.use(passport.initialize());
+require('./middleware/passport')(passport);
 
 // to decode req.body
 app.use(bodyParser.urlencoded({ extended: true }));
