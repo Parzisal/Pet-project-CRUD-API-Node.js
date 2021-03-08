@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+const tokenConfig = require('../config/jsonwebtoken');
 
 module.exports.login = async function (req, res) {
   const email = req.body.email;
@@ -11,10 +12,10 @@ module.exports.login = async function (req, res) {
       const token = jwt.sign({
         userId: user._id,
         email: user.email,
-      }, 'testKey', { expiresIn: 3600 });
+      }, tokenConfig.secretKey, { expiresIn: tokenConfig.expiresTime });
 
       res.status(200).json({
-        token,
+        token: `Bearer ${token}`,
       })
     } else {
       res.status(401).json({
@@ -47,7 +48,7 @@ module.exports.register = async function(req, res) {
       res.status(201).json(user);
     } catch(error) {
       res.status(401).json({
-        message: 'User registered successfully'
+        message: 'Registration error'
       })
     }
   }
