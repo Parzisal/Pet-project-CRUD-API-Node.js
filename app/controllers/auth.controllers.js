@@ -1,6 +1,7 @@
-const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+const User = require('../models/user');
 const tokenConfig = require('../config/jsonwebtoken');
+const errorHandler = require('../utils/errorHandler');
 
 module.exports.login = async function (req, res) {
   const email = req.body.email;
@@ -18,38 +19,30 @@ module.exports.login = async function (req, res) {
         token: `Bearer ${token}`,
       })
     } else {
-      res.status(401).json({
-        message: 'Invalid password. Please try again',
-      })
+      errorHandler(res, 'Invalid password. Please try again', 401);
     }
   } else {
-    res.status(404).json({
-      message: 'User is not found',
-    });
+    errorHandler(res, 'User is not found', 404);
   }
 }
 
-module.exports.register = async function(req, res) {
+module.exports.register = async function (req, res) {
   const email = req.body.email;
   const user = await User.findOne({ email });
 
   if (user) {
-    res.status(409).json({
-      message: 'Such mail is already registered',
-    });
+    errorHandler(res, 'Such mail is already registered', 409);
   } else {
     const user = new User({
       email: req.body.email,
       password: req.body.password,
     });
-  
+
     try {
       await user.save();
       res.status(201).json(user);
-    } catch(error) {
-      res.status(401).json({
-        message: 'Registration error'
-      })
+    } catch (error) {
+      errorHandler(res, error, 401);
     }
   }
 }
